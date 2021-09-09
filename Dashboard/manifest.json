@@ -22,5 +22,6 @@
       "64": "./images/dashboard-48.png"
     }
   },
-  "options_page": "options.html"
+  "options_page": "options.html",
+  "chrome_url_overrides": { "newtab": "index.html" }
 }

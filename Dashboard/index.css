@@ -1,0 +1,91 @@
+:root {
+  --primary-light: #8abdff;
+  --primary: #6d5dfc;
+  --primary-dark: #5b0eeb;
+  --white: #FFFFFF;
+  --greyLight-1: #E4EBF5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+  --success: #43a047;
+  --warning: #fb8c00;
+  --error: #e53935;
+  --purple: #8e24aa;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./fonts/opensans-regular.woff2') format('woff2'),
+       url('./fonts/opensans-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Digital Seven';
+  src: url('./fonts/digitalseven-regular.woff2') format('woff2'),
+       url('./fonts/digitalseven-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+html,
+body,
+.app {
+  height: 100vh;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  background-color: var(--primary-dark);
+  color: var(--white);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.greeting {
+  margin-top: 1rem;
+  font-size: 2.8rem;
+}
+
+.day,
+.time {
+  font-family: 'Digital Seven';
+}
+
+.day {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.time {
+  margin-top: 0.8rem;
+  font-size: 5rem;
+}
+
+.time span {
+  display: inline-block;
+  margin-right: -4px;
+  vertical-align: middle;
+  line-height: 1;
+}
