@@ -1,0 +1,26 @@
+{
+  "name": "Dashboard",
+  "description": "Replace new tab page with a personal dashboard time, weather, quotes, and inspiration.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./images/dashboard-16.png",
+      "32": "./images/dashboard-32.png",
+      "48": "./images/dashboard-48.png",
+      "64": "./images/dashboard-48.png"
+    },
+    "icons": {
+      "16": "./images/dashboard-16.png",
+      "32": "./images/dashboard-32.png",
+      "48": "./images/dashboard-48.png",
+      "64": "./images/dashboard-48.png"
+    }
+  },
+  "options_page": "options.html"
+}
