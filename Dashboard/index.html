@@ -10,54 +10,32 @@
 </head>
 <body>
   <div class="app">
-    <p class="day">
-      <span id="day"></span>
-      <span>:</span>
-      <span id="num-date"></span>
-      <span>-</span>
-      <span id="month"></span>
-      <span>-</span>
-      <span id="year"></span>
-    </p>
-    <p class="time">
-      <span id="hours"></span>
-      <span class="colon">:</span>
-      <span id="minutes"></span>
-      <span class="colon">:</span>
-      <span id="seconds"></span>
-    </p>
-    <h1 class="greeting">Good <span id="timeframe"></span>, Guest!</h1>
-    <div id="settings" class="btn btn_settings pos-absolute z-2 pos-right-2 pos-bottom-2 shadow">&#9728;</div>
-    <div id="settings_model" class="model model-settings pos-absolute z-2 pos-bottom-6 shadow">
-      <div class="model-wrapper">
-        <div class="settings-category">
-          <p>Background color:</p>
-          <div id="backgrounColor"></div>
-        </div>
-        <div class="settings-category">
-          <div class="switch-holder">
-            <div class="switch-label">
-              <span>Background Image</span>
-            </div>
-            <div class="switch-toggle">
-              <input type="checkbox" id="bgimage">
-              <label for="bgimage"></label>
-            </div>
-          </div>
-        </div>
-        <div class="settings-category">
-          <div class="switch-holder">
-            <div class="switch-label">
-              <span>Time format 24/12:</span>
-            </div>
-            <div class="switch-toggle">
-              <input type="checkbox" id="timeformat">
-              <label for="timeformat"></label>
-            </div>
-          </div>
-        </div>
+    <div id="backgroundImage"></div>
+    <header>
+      <span></span>
+      <nav>
+        <button>News</button>
+        <button>Sports</button>
+      </nav>
+      <div>Cloud</div>
+    </header>
+    <div class="container">
+      <div class="time">
+        <span id="hours"></span>
+        <span class="colon">:</span>
+        <span id="minutes"></span>
+        <span class="colon">:</span>
+        <span id="seconds"></span>
       </div>
+      <h1 class="greeting">Good <span id="timeframe"></span>, Guest!</h1>
     </div>
+    <footer>
+      <button>Settigs</button>
+      <p>Your mind is powserful thing. When you fill it with positive thoughts. Your life will start to change.</p>
+      <button>
+        todos
+      </button>
+    </footer>
   </div>
   <script src="./index.js"></script>
 </body>

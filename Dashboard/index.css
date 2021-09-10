@@ -37,9 +37,6 @@ body {
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-  background-color: #1976d2;
-  color: #ffffff;
 }
 
 .app {
@@ -47,12 +44,47 @@ body {
   z-index: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+
+#backgroundImage {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.app header,
+.app .container,
+.app footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 15px;
+}
+
+.app header {
+  height: 60px;
+}
+
+.app .container {
+  height: calc(100% - 120px);
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app footer {
+  height: 60px;
 }
 
 .greeting {
-  margin-top: 1rem;
+  font-weight: 500;
   font-size: 2.8rem;
 }
 
@@ -77,6 +109,8 @@ body {
   vertical-align: middle;
   line-height: 1;
 }
+
+/* 
 
 #backgrounColor button {
   margin-right: 0.5rem;
@@ -216,4 +250,4 @@ body {
   background-color: #00b33c;
   box-shadow: -3px -3px 5px rgba(255,255,255,.5),
               3px 3px 5px #00b33c;
-}
+} */
