@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>My Dashboard</title>
   <link rel="stylesheet" href="./index.css" />
 </head>
@@ -11,11 +12,11 @@
   <div class="app">
     <p class="day">
       <span id="day"></span>
-      <span id="hifun">-</span>
+      <span>:</span>
       <span id="num-date"></span>
-      <span id="slash">/</span>
+      <span>-</span>
       <span id="month"></span>
-      <span id="slash">/</span>
+      <span>-</span>
       <span id="year"></span>
     </p>
     <p class="time">
@@ -25,7 +26,38 @@
       <span class="colon">:</span>
       <span id="seconds"></span>
     </p>
-    <h1 class="greeting">Good <span id="timeframe"></span>, Vulchi Vijaya Kumar</h1>
+    <h1 class="greeting">Good <span id="timeframe"></span>, Guest!</h1>
+    <div id="settings" class="btn btn_settings pos-absolute z-2 pos-right-2 pos-bottom-2 shadow">&#9728;</div>
+    <div id="settings_model" class="model model-settings pos-absolute z-2 pos-bottom-6 shadow">
+      <div class="model-wrapper">
+        <div class="settings-category">
+          <p>Background color:</p>
+          <div id="backgrounColor"></div>
+        </div>
+        <div class="settings-category">
+          <div class="switch-holder">
+            <div class="switch-label">
+              <span>Background Image</span>
+            </div>
+            <div class="switch-toggle">
+              <input type="checkbox" id="bgimage">
+              <label for="bgimage"></label>
+            </div>
+          </div>
+        </div>
+        <div class="settings-category">
+          <div class="switch-holder">
+            <div class="switch-label">
+              <span>Time format 24/12:</span>
+            </div>
+            <div class="switch-toggle">
+              <input type="checkbox" id="timeformat">
+              <label for="timeformat"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <script src="./index.js"></script>
 </body>
