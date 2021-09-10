@@ -14,6 +14,10 @@ function prefixZero(num) {
   return num < 10 ? `0${num}` : num;
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 function today() {
   const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const date = new Date();
@@ -107,6 +111,19 @@ function loadBgImage() {
   });
 }
 
+function loadQuotes() {
+  fetch("https://type.fit/api/quotes")
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    const quote = data[getRandomInt(1643)];
+    chrome.storage.sync.set({ quote });
+    document.getElementById("quote").innerHTML = quote.text;
+    document.getElementById("quote_author").innerHTML = quote.author;
+  });
+}
+
 function drawWeather( data ) {
   var celcius = Math.round(parseFloat(data.main.temp)-273.15);
   // var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
@@ -143,7 +160,6 @@ function weatherBallon( cityName ) {
   }
 }
 
-
 chrome.storage.sync.get('cityName', (data) => {
   const cityName = data.cityName;
   weatherBallon(cityName);
@@ -166,11 +182,22 @@ function runOncePerDay() {
           loadBgImage();
         }
       });
+      chrome.storage.sync.get('quote', (data) => {
+        const quote = data.quote;
+        if (quote) {
+          document.getElementById("quote").innerHTML = quote.text;
+          document.getElementById("quote_author").innerHTML = quote.author;
+        }
+        else {
+          loadQuotes();
+        }
+      });
     }
     else {
       localdate = date;
       chrome.storage.sync.set({ localdate });
       loadBgImage();
+      loadQuotes();
     }
   });
 }
