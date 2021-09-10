@@ -14,20 +14,55 @@ function prefixZero(num) {
   return num < 10 ? `0${num}` : num;
 }
 
-function time () {
+function today() {
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const date = new Date();
+  const numDate = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const currDay = date.getDay();
+  const whatDay = DAYS[currDay];
+
+  document.querySelector('#whatday').innerHTML = whatDay;
+  document.querySelector('#today').innerHTML = prefixZero(numDate);
+  document.querySelector('#month').innerHTML = prefixZero(month);
+  document.querySelector('#year').innerHTML = year;
+}
+
+today();
+
+function getHours() {
   let time = new Date();
-  document.querySelector('#hours').innerHTML = prefixZero(time.getHours());
+  chrome.storage.sync.get('twofourtimeformat', (data) => {
+    const timeformat = data.twofourtimeformat;
+    if (timeformat) {
+      if (time.getHours() >= 12)
+        document.querySelector('#ampm').innerHTML = 'PM';
+      else
+        document.querySelector('#ampm').innerHTML = 'AM';
+      document.querySelector('#hours').innerHTML = prefixZero(time.getHours() - 12);
+    }
+    else{
+      document.querySelector('#ampm').innerHTML = '';
+      document.querySelector('#hours').innerHTML = prefixZero(time.getHours());
+    }
+  });
+}
+
+function loadSystemTime() {
+  const time = new Date();
+  getHours();
   document.querySelector('#minutes').innerHTML = prefixZero(time.getMinutes());
   document.querySelector('#seconds').innerHTML = prefixZero(time.getSeconds());
 }
 
-time();
+loadSystemTime();
 
-function timeInterval () {
+function updateSystemTime() {
   let time = new Date();
   if (time.getSeconds() == 0) {
     if (time.getMinutes() == 0) {
-      document.querySelector('#hours').innerHTML = prefixZero(time.getHours());
+      getHours();
     }
     else {
       document.querySelector('#minutes').innerHTML = prefixZero(time.getMinutes());
@@ -39,7 +74,7 @@ function timeInterval () {
 }
 
 setInterval(function () {
-  timeInterval();
+  updateSystemTime();
 }, 1000);
 
 function timeFrame() {
@@ -72,14 +107,53 @@ function loadBgImage() {
   });
 }
 
+function drawWeather( data ) {
+  var celcius = Math.round(parseFloat(data.main.temp)-273.15);
+  // var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
+  var description = data.weather[0].description; 
+  
+  document.getElementById('weather_description').innerHTML = description;
+  document.getElementById('weather_temp').innerHTML = celcius + '&deg;';
+  document.getElementById('weather_location').innerHTML = data.name;
+  
+  if( description.indexOf('rain') > 0 ) {
+    document.body.className = 'rainy';
+  } else if( description.indexOf('cloud') > 0 ) {
+    document.body.className = 'cloudy';
+  } else if( description.indexOf('sunny') > 0 ) {
+    document.body.className = 'sunny';
+  } else {
+    document.body.className = 'clear';
+  }
+}
+
+function weatherBallon( cityName ) {
+  const key = 'ee7282f5ea6e0c75caebf32e113e3813';
+  if(key=='')
+    document.getElementById('weather_error').innerHTML = 'Openweathermap api key missing!';
+  else {
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName+ '&appid=' + key)  
+    .then(function(resp) { return resp.json() }) // Convert data to json
+    .then(function(data) {
+      drawWeather(data);
+    })
+    .catch(function() {
+      // catch any errors
+    });
+  }
+}
+
+// loadWeather();
+weatherBallon('chennai');
+
 // this function which should run once a day
 function runOncePerDay() {
   let date = new Date().toLocaleDateString();
-  let localDate = null;
+  let localdate = null;
 
-  chrome.storage.sync.get('localDate', (data) => {
-    localDate = data.localDate;
-    if (localDate == date) {
+  chrome.storage.sync.get('localdate', (data) => {
+    localdate = data.localdate;
+    if (localdate == date) {
       chrome.storage.sync.get('imageUrl', (data) => {
         const imageUrl = data.imageUrl;
         if (imageUrl) {
@@ -91,8 +165,8 @@ function runOncePerDay() {
       });
     }
     else {
-      localDate = date;
-      chrome.storage.sync.set({ localDate });
+      localdate = date;
+      chrome.storage.sync.set({ localdate });
       loadBgImage();
     }
   });
@@ -104,23 +178,6 @@ runOncePerDay();
 // let selectedClassName = "active";
 // const btnColors = ["#1976d2", "#dc004e", "#79e902", "#fa9403", "#fdc702"];
 
-
-// function day() {
-//   const date = new Date();
-//   const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-//   const numDate = date.getDate();
-//   const month = date.getMonth() + 1;
-//   const year = date.getFullYear();
-//   const currDay = date.getDay();
-//   const dayString = DAYS[currDay];
-
-//   document.querySelector('#day').innerHTML = dayString;
-//   document.querySelector('#num-date').innerHTML = prefixZero(numDate);
-//   document.querySelector('#month').innerHTML = prefixZero(month);
-//   document.querySelector('#year').innerHTML = year;
-// }
-
-// day();
 
 
 // // Reacts to a button click by marking the selected button and saving the selection

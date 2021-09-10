@@ -4,20 +4,34 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>My Dashboard</title>
+  <title>My Personal Tab</title>
   <link rel="stylesheet" href="./index.css" />
 </head>
 <body>
   <div class="app">
     <div id="backgroundImage"></div>
     <header>
-      <span></span>
+      <div class="today shadow">
+        <span id="whatday"></span>
+        <span>:</span>
+        <span id="today"></span>
+        <span>/</span>
+        <span id="month"></span>
+        <span>/</span>
+        <span id="year"></span>
+      </div>
       <nav>
         <button>News</button>
         <button>Sports</button>
       </nav>
-      <div>Cloud</div>
+      <div class="weather">
+        <div class="weather-data">
+          <span id="weather_description"></span>,
+          <span id="weather_temp"></span>,
+          <span id="weather_location"></span>
+        </div>
+        <div class="cloud"></div>
+      </div>
     </header>
     <div class="container">
       <div class="time">
@@ -26,6 +40,7 @@
         <span id="minutes"></span>
         <span class="colon">:</span>
         <span id="seconds"></span>
+        <span id="ampm"></span>
       </div>
       <h1 class="greeting">Good <span id="timeframe"></span>, Guest!</h1>
     </div>
