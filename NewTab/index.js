@@ -143,8 +143,11 @@ function weatherBallon( cityName ) {
   }
 }
 
-// loadWeather();
-weatherBallon('chennai');
+
+chrome.storage.sync.get('cityName', (data) => {
+  const cityName = data.cityName;
+  weatherBallon(cityName);
+})
 
 // this function which should run once a day
 function runOncePerDay() {

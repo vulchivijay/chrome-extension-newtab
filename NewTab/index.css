@@ -39,6 +39,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  padding: 5px 15px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+              0px 2px 2px 0px rgb(0 0 0 / 14%),
+              0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
 .app {
   position: relative;
   z-index: 0;
@@ -103,15 +113,17 @@ body {
   font-family: 'Digital Seven';
 }
 
-.today {
+.today,
+.weather {
   position: relative;
   z-index: 1;
   padding: 5px 10px;
   font-size: 1.5rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
-.today:before {
+.today::before,
+.weather::before {
   content: '';
   position: absolute;
   z-index: -1;
@@ -119,6 +131,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -144,68 +157,9 @@ body {
               0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 
-.weather {
-  position: relative;
-  z-index: 1;
-  margin-right: 89px;
-  padding: 5px 10px;
-  display: flex;
-  font-size: 1.2rem;
-  text-transform: capitalize;
-  color: #ffffff;
-}
-
-.weather:before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
 .weather-data {
   font-size: 1rem;
 }
-
-.cloud {
-  position: absolute;
-  top: 15px;
-  right: -90px;
-  margin-left: 5px;
-  width: 80px;
-  height: 30px;
-  background: #ECEFF1;
-  box-shadow: 10px 10px rgba(0,0,0,0.2);
-  border-radius: 60px;
-}
-
-.cloud::after,
-.cloud::before{
-  content: "";
-  position: absolute;
-  z-index: -1;
-  display: inline-block;
-  background: inherit;
-  border-radius: inherit;
-}
-
-.cloud::after {
-  width: 30px;
-  height: 30px;
-  top: -20px;
-  left: 5px;
-}
-.cloud::before {
-  width: 50px;
-  height: 50px;
-  top: -25px;
-  left: 20px;
-}
-
-
 /* 
 
 #backgrounColor button {
