@@ -1,3 +1,6 @@
+const newsAPI = '82aa61aa0c8e41f195b1e5da5a02bbd3';
+const weatherAPI = 'ee7282f5ea6e0c75caebf32e113e3813';
+
 let backgroundImage = document.getElementById('backgroundImage');
 
 chrome.storage.sync.get('blue', (data) => {
@@ -40,11 +43,18 @@ function getHours() {
   chrome.storage.sync.get('twofourtimeformat', (data) => {
     const timeformat = data.twofourtimeformat;
     if (timeformat) {
-      if (time.getHours() >= 12)
+      if (time.getHours() >= 12) {
         document.querySelector('#ampm').innerHTML = 'PM';
-      else
+      }
+      else {
         document.querySelector('#ampm').innerHTML = 'AM';
-      document.querySelector('#hours').innerHTML = prefixZero(time.getHours() - 12);
+      }
+      if (time.getHours() > 12) {
+        document.querySelector('#hours').innerHTML = prefixZero(time.getHours() - 12);
+      }
+      else {
+        document.querySelector('#hours').innerHTML = prefixZero(time.getHours());
+      }
     }
     else{
       document.querySelector('#ampm').innerHTML = '';
@@ -124,6 +134,18 @@ function loadQuotes() {
   });
 }
 
+function loadNews() {
+  fetch('https://newsapi.org/v2/everything?' + 'q=Apple&' + 'from=2021-09-10&' + 'sortBy=popularity&' + `apiKey=${newsAPI}`)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    console.log('news', data);
+  });
+}
+
+loadNews();
+
 function drawWeather( data ) {
   var celcius = Math.round(parseFloat(data.main.temp)-273.15);
   // var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
@@ -145,11 +167,10 @@ function drawWeather( data ) {
 }
 
 function weatherBallon( cityName ) {
-  const key = 'ee7282f5ea6e0c75caebf32e113e3813';
-  if(key=='')
+  if(weatherAPI=='')
     document.getElementById('weather_error').innerHTML = 'Openweathermap api key missing!';
   else {
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName+ '&appid=' + key)  
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName+ '&appid=' + weatherAPI)  
     .then(function(resp) { return resp.json() }) // Convert data to json
     .then(function(data) {
       drawWeather(data);
