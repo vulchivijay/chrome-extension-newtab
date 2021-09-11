@@ -69,6 +69,11 @@ button.active {
   color: #000000;
 }
 
+.disable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .app {
   position: relative;
   z-index: 0;
