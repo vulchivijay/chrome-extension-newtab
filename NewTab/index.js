@@ -1,6 +1,18 @@
 const newsAPI = '82aa61aa0c8e41f195b1e5da5a02bbd3';
 const weatherAPI = 'ee7282f5ea6e0c75caebf32e113e3813';
 
+const newsBtn = document.getElementById("newsBtn");
+const newsModel = document.getElementById("news_model");
+
+const sportsBtn = document.getElementById("sportsBtn");
+const sportsModel = document.getElementById("sports_model");
+
+const settigsBtn = document.getElementById("settigsBtn");
+const settigsModel = document.getElementById("settings_model");
+
+const todosBtn = document.getElementById("todosBtn");
+const todosModel = document.getElementById("todos_model");
+
 let backgroundImage = document.getElementById('backgroundImage');
 
 chrome.storage.sync.get('blue', (data) => {
@@ -134,17 +146,17 @@ function loadQuotes() {
   });
 }
 
-function loadNews() {
-  fetch('https://newsapi.org/v2/everything?' + 'q=Apple&' + 'from=2021-09-10&' + 'sortBy=popularity&' + `apiKey=${newsAPI}`)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    console.log('news', data);
-  });
-}
+// function loadNews() {
+//   fetch('https://newsapi.org/v2/everything?' + 'q=Apple&' + 'from=2021-09-10&' + 'sortBy=popularity&' + `apiKey=${newsAPI}`)
+//   .then(function(response) {
+//     return response.json();
+//   })
+//   .then(function(data) {
+//     console.log('news', data);
+//   });
+// }
 
-loadNews();
+// loadNews();
 
 function drawWeather( data ) {
   var celcius = Math.round(parseFloat(data.main.temp)-273.15);
@@ -271,15 +283,54 @@ runOncePerDay();
 // // Initialize the page by constructing the color options
 // constructOptions(btnColors);
 
-// const settingsBtn = document.getElementById("settings");
-// const settingsModel = document.getElementById("settings_model");
-// settingsBtn.addEventListener("click", function () {
-//   if(settingsModel.classList.contains("active")) {
-//     settingsModel.classList.remove("active");
-//     settingsBtn.classList.remove("active");
-//   }
-//   else {
-//     settingsModel.classList.add("active");
-//     settingsBtn.classList.add("active");
-//   }
-// });
+newsBtn.addEventListener("click", function () {
+  if(sportsModel.classList.contains("active")) {
+    sportsModel.classList.remove("active");
+    sportsBtn.classList.remove("active");
+  }
+  if(newsModel.classList.contains("active")) {
+    newsModel.classList.remove("active");
+    newsBtn.classList.remove("active");
+  }
+  else {
+    newsModel.classList.add("active");
+    newsBtn.classList.add("active");
+  }
+});
+
+sportsBtn.addEventListener("click", function () {
+  if(newsModel.classList.contains("active")) {
+    newsModel.classList.remove("active");
+    newsBtn.classList.remove("active");
+  }
+  if(sportsModel.classList.contains("active")) {
+    sportsModel.classList.remove("active");
+    sportsBtn.classList.remove("active");
+  }
+  else {
+    sportsModel.classList.add("active");
+    sportsBtn.classList.add("active");
+  }
+});
+
+settigsBtn.addEventListener("click", function () {
+  if(settigsModel.classList.contains("active")) {
+    settigsModel.classList.remove("active");
+    settigsBtn.classList.remove("active");
+  }
+  else {
+    settigsModel.classList.add("active");
+    settigsBtn.classList.add("active");
+  }
+});
+
+todosBtn.addEventListener("click", function () {
+  if(todosModel.classList.contains("active")) {
+    todosModel.classList.remove("active");
+    todosBtn.classList.remove("active");
+  }
+  else {
+    todosModel.classList.add("active");
+    todosBtn.classList.add("active");
+  }
+});

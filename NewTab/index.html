@@ -21,8 +21,8 @@
         <span id="year"></span>
       </div>
       <nav>
-        <button>News</button>
-        <button>Sports</button>
+        <button id="newsBtn">News</button>
+        <button id="sportsBtn">Sports</button>
       </nav>
       <div class="weather">
         <div class="weather-data shadow">
@@ -44,15 +44,27 @@
       <h1 class="greeting">Good <span id="timeframe"></span>, Guest!</h1>
     </div>
     <footer>
-      <button>Settigs</button>
+      <button id="settigsBtn">Settigs</button>
       <div class="quotes">
         <span id="quote"></span> ---
         <span id="quote_author"></span>
       </div>
-      <button>
-        todos
-      </button>
+      <button id="todosBtn">todos</button>
     </footer>
+    <div id="news_model" class="model model_news-feed shadow">
+      <p>News:</p>
+      <div id="news_feed">Loading...</div>
+    </div>
+    <div id="sports_model" class="model model_sports-feed shadow">
+      <p>Sports:</p>
+      <div id="sports_feed">Loading...</div>
+    </div>
+    <div id="settings_model" class="model model_settings shadow">
+      <p>Settings:</p>
+    </div>
+    <div id="todos_model" class="model model_todos shadow">
+      <p>Todos:</p>
+    </div>
   </div>
   <script src="./index.js"></script>
 </body>

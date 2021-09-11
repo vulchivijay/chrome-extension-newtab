@@ -5,5 +5,8 @@ Building my first chrome extension
 
 ![image](https://github.com/vulchivijay/chrome-extension-background-image-with-time/blob/main/screenshots/home-page.jpg)
 
-
 ![image](https://github.com/vulchivijay/chrome-extension-background-image-with-time/blob/main/screenshots/home-page-2.jpg)
+
+![image](https://github.com/vulchivijay/chrome-extension-background-image-with-time/blob/main/screenshots/home-page-3.jpg)
+
+![image](https://github.com/vulchivijay/chrome-extension-background-image-with-time/blob/main/screenshots/home-page-4.jpg)
