@@ -23,7 +23,7 @@ Building my first chrome extension
 2. Dynamic quote one for day. Every next day we will see different quote.
 
 ## In progress features:
-1. Settigns dialog.
+1. Settings dialog.
 2. Todo's dialog.
 3. Background image category dropdown under settings dialog if user want to change default category nature.
 4. Off Background image and On Background color with multiple options.

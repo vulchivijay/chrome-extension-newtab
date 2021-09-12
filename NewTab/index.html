@@ -44,7 +44,7 @@
       <h1 class="greeting">Good <span id="timeframe"></span>, Guest!</h1>
     </div>
     <footer>
-      <button id="settigsBtn">Settigs</button>
+      <button id="settigsBtn">Settings</button>
       <div class="quotes">
         <span id="quote"></span> ---
         <span id="quote_author"></span>
@@ -60,7 +60,17 @@
       <div id="sports_feed">Loading...</div>
     </div>
     <div id="settings_model" class="model model_settings shadow">
-      <p>Settings:</p>
+      <div class="option">
+        <span>Background Image</span>
+        <label class="switch">
+          <input id="bg_checkbox" type="checkbox" />
+          <div></div>
+        </label>
+      </div>
+      <div id="bg_refresh" class="option disable">
+        <span>Background image refresh</span>
+        <span id="bg_reload" class=reload>&#x21bb;</span>
+      </div>
     </div>
     <div id="todos_model" class="model model_todos shadow">
       <p>Todo's:</p>

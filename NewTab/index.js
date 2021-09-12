@@ -1,16 +1,16 @@
 const newsAPI = '82aa61aa0c8e41f195b1e5da5a02bbd3';
 const weatherAPI = 'ee7282f5ea6e0c75caebf32e113e3813';
 
-// const newsBtn = document.getElementById("newsBtn");
-// const newsModel = document.getElementById("news_model");
-// const sportsBtn = document.getElementById("sportsBtn");
-// const sportsModel = document.getElementById("sports_model");
+// const newsBtn = document.getElementById('newsBtn');
+// const newsModel = document.getElementById('news_model');
+// const sportsBtn = document.getElementById('sportsBtn');
+// const sportsModel = document.getElementById('sports_model');
 
-const settigsBtn = document.getElementById("settigsBtn");
-const settigsModel = document.getElementById("settings_model");
+const settigsBtn = document.getElementById('settigsBtn');
+const settigsModel = document.getElementById('settings_model');
 
-const todosBtn = document.getElementById("todosBtn");
-const todosModel = document.getElementById("todos_model");
+const todosBtn = document.getElementById('todosBtn');
+const todosModel = document.getElementById('todos_model');
 
 let backgroundImage = document.getElementById('backgroundImage');
 
@@ -133,15 +133,15 @@ function loadBgImage() {
 }
 
 function loadQuotes() {
-  fetch("https://type.fit/api/quotes")
+  fetch('https://type.fit/api/quotes')
   .then(function(response) {
     return response.json();
   })
   .then(function(data) {
     const quote = data[getRandomInt(1643)];
     chrome.storage.sync.set({ quote });
-    document.getElementById("quote").innerHTML = quote.text;
-    document.getElementById("quote_author").innerHTML = quote.author;
+    document.getElementById('quote').innerHTML = quote.text;
+    document.getElementById('quote_author').innerHTML = quote.author;
   });
 }
 
@@ -205,8 +205,8 @@ function runOncePerDay() {
       chrome.storage.sync.get('quote', (data) => {
         const quote = data.quote;
         if (quote) {
-          document.getElementById("quote").innerHTML = quote.text;
-          document.getElementById("quote_author").innerHTML = quote.author;
+          document.getElementById('quote').innerHTML = quote.text;
+          document.getElementById('quote_author').innerHTML = quote.author;
         }
         else {
           loadQuotes();
@@ -223,6 +223,61 @@ function runOncePerDay() {
 }
 
 runOncePerDay();
+
+settigsBtn.addEventListener('click', function () {
+  if(settigsModel.classList.contains('active')) {
+    settigsModel.classList.remove('active');
+    settigsBtn.classList.remove('active');
+  }
+  else {
+    settigsModel.classList.add('active');
+    settigsBtn.classList.add('active');
+  }
+});
+
+todosBtn.addEventListener('click', function () {
+  if(todosModel.classList.contains('active')) {
+    todosModel.classList.remove('active');
+    todosBtn.classList.remove('active');
+  }
+  else {
+    todosModel.classList.add('active');
+    todosBtn.classList.add('active');
+  }
+});
+
+const BgOnOffCheckbox = document.getElementById('bg_checkbox');
+const BgRefresh = document.getElementById('bg_refresh');
+const BgReloadBtn = document.getElementById('bg_reload');
+
+chrome.storage.sync.get('isbackground', (data) => {
+  const BgImage = data.isbackground;
+  if (BgImage) {
+    BgOnOffCheckbox.checked = true;
+    BgRefresh.classList.remove('disable');
+  }
+  else {
+    BgOnOffCheckbox.checked = false;
+    BgRefresh.classList.add('disable');
+  }
+});
+
+BgOnOffCheckbox.addEventListener('click', function () {
+  if(BgOnOffCheckbox.checked) {
+    BgRefresh.classList.remove('disable');
+    backgroundImage.classList.remove('hide');
+  }
+  else {
+    BgRefresh.classList.add('disable');
+    backgroundImage.classList.add('hide');
+  }
+});
+
+BgReloadBtn.addEventListener('click', function () {
+  loadBgImage();
+});
+
+
 
 // let page = document.getElementById("backgrounColor");
 // let selectedClassName = "active";
@@ -299,25 +354,3 @@ runOncePerDay();
 //     sportsBtn.classList.add("active");
 //   }
 // });
-
-settigsBtn.addEventListener("click", function () {
-  if(settigsModel.classList.contains("active")) {
-    settigsModel.classList.remove("active");
-    settigsBtn.classList.remove("active");
-  }
-  else {
-    settigsModel.classList.add("active");
-    settigsBtn.classList.add("active");
-  }
-});
-
-todosBtn.addEventListener("click", function () {
-  if(todosModel.classList.contains("active")) {
-    todosModel.classList.remove("active");
-    todosBtn.classList.remove("active");
-  }
-  else {
-    todosModel.classList.add("active");
-    todosBtn.classList.add("active");
-  }
-});
