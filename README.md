@@ -13,7 +13,7 @@ Building my first chrome extension
 1. Open Sans
 2. Digital Seven
 
-## 3rd party libraries:
+## API's:
 1. unsplash for background images.
 2. type.fit for quotes.
 3. openweathermap for weather which required apikey.
@@ -25,8 +25,9 @@ Building my first chrome extension
 ## In progress features:
 1. Settings dialog.
 2. Todo's dialog.
-3. Background image category dropdown under settings dialog if user want to change default category nature.
-4. Off Background image and On Background color with multiple options.
+3. Take user names to display.
+4. Background image category dropdown under settings dialog if user want to change default category nature.
+5. Off Background image and On Background color with multiple options.
 
 ### Home page:
 

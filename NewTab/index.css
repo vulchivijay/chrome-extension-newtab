@@ -147,6 +147,36 @@ button.active {
   font-size: 2.8rem;
 }
 
+.users-goal {
+  margin-top: 15px;
+  max-width: 60%;
+}
+
+.users-goal h3 {
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+input[type="text"] {
+  height: 40px;
+  padding: 15px;
+  color: #ffffff;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  background: transparent;
+}
+
+.greeting input {
+  width: 200px;
+  font-size: 2.8rem;
+}
+
+.users-goal input {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 .today,
 .time {
   font-family: 'Digital Seven';
