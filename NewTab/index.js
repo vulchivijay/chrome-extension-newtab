@@ -19,6 +19,9 @@ const BgRefresh = document.getElementById('bg_refresh');
 const BgCategory = document.getElementById('bg_image_categ');
 const BgReloadBtn = document.getElementById('bg_reload');
 
+const userNameInput = document.getElementById('user_name_input');
+const userName = document.getElementById('user_name');
+
 const TimeFormatOnOffCheckbox = document.getElementById('time_checkbox');
 
 const page = document.getElementById('bg_color_palette');
@@ -63,7 +66,6 @@ today();
 function getHours() {
   let time = new Date();
   chrome.storage.sync.get('twofourtimeformat', (data) => {
-    console.log('Test: ', data.twofourtimeformat);
     const timeformat = data.twofourtimeformat;
     if (timeformat) {
       if (time.getHours() >= 12) {
@@ -197,7 +199,6 @@ chrome.storage.sync.get('cityName', (data) => {
   weatherBallon(cityName);
 })
 
-// this function which should run once a day
 function runOncePerDay() {
   let date = new Date().toLocaleDateString();
   let localdate = null;
@@ -285,6 +286,25 @@ chrome.storage.sync.get('isbackground', (data) => {
   }
 });
 
+chrome.storage.sync.get('userName', (data) => {
+  const name = data.userName;
+  if (name != 'Guest!') {
+    userName.innerHTML = name;
+    userNameInput.classList.add('hide');
+  }
+  else {
+    userNameInput.classList.remove('hide');
+    userNameInput.value = name;
+  }
+})
+
+userNameInput.addEventListener('keyup', function (e) {
+  const userName = e.target.value
+  chrome.storage.sync.set({ userName });
+  userNameInput.value = userName;
+});
+
+
 BgOnOffCheckbox.addEventListener('click', function () {
   if(BgOnOffCheckbox.checked) {
     backgroundImage.classList.remove('hide');
@@ -304,44 +324,33 @@ BgReloadBtn.addEventListener('click', function () {
   loadBgImage();
 });
 
-// Reacts to a button click by marking the selected button and saving the selection
 function handleButtonClick(event) {
-  // Remove styling from the previously selected color
   let current = event.target.parentElement.querySelector(`.active`);
   if (current && current !== event.target) {
     current.classList.remove('active');
   }
-  // Mark the button as selected
   let color = event.target.dataset.color;
   event.target.classList.add('active');
   chrome.storage.sync.set({ color });
   document.body.style.backgroundColor = color;
 }
 
-// Add a button to the page for each supplied color
 function constructOptions(buttonColors) {
   chrome.storage.sync.get('color', (data) => {
     let currentColor = data.color;
-    // For each color we were provided…
     for (let buttonColor of buttonColors) {
-      // …create a button with that color…
       let button = document.createElement('button');
       button.dataset.color = buttonColor;
       button.style.backgroundColor = buttonColor;
-
-      // …mark the currently selected color…
       if (buttonColor === currentColor) {
         button.classList.add('active');
       }
-
-      // …and register a listener for when that button is clicked
       button.addEventListener('click', handleButtonClick);
       page.appendChild(button);
     }
   });
 }
 
-// Initialize the page by constructing the color options
 constructOptions(bgColors);
 
 // newsBtn.addEventListener("click", function () {

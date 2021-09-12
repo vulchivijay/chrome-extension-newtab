@@ -8,6 +8,7 @@ const isbackground = true;
 const localdate = date;
 const twofourtimeformat = true;
 const cityName = 'Chennai';
+const userName = 'Guest!';
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({ blue });
@@ -16,4 +17,5 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({ localdate });
   chrome.storage.sync.set({ twofourtimeformat });
   chrome.storage.sync.set({ cityName });
+  chrome.storage.sync.set({ userName });
 });
