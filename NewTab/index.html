@@ -68,6 +68,13 @@
     </div>
     <div id="settings_model" class="model model_settings shadow">
       <div class="option">
+        <span>Time format 24 hours</span>
+        <label class="switch">
+          <input id="time_checkbox" type="checkbox" />
+          <div></div>
+        </label>
+      </div>
+      <div class="option">
         <span>Background image</span>
         <label class="switch">
           <input id="bg_checkbox" type="checkbox" />
@@ -77,6 +84,14 @@
       <div id="bg_refresh" class="option disable">
         <span>Change background image</span>
         <span id="bg_reload" class=reload>&#x21bb;</span>
+      </div>
+      <div id="bg_image_categ" class="option disable">
+        <span>Image category</span>
+        <select>
+          <option>Animals</option>
+          <option>Beach</option>
+          <option>Nature</option>
+        </select>
       </div>
       <div id="bg_color_wrapper" class="option bg-color disable">
         <div>Change background color</div>

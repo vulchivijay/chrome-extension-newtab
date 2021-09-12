@@ -16,7 +16,10 @@ let backgroundImage = document.getElementById('backgroundImage');
 
 const BgOnOffCheckbox = document.getElementById('bg_checkbox');
 const BgRefresh = document.getElementById('bg_refresh');
+const BgCategory = document.getElementById('bg_image_categ');
 const BgReloadBtn = document.getElementById('bg_reload');
+
+const TimeFormatOnOffCheckbox = document.getElementById('time_checkbox');
 
 const page = document.getElementById('bg_color_palette');
 const bgColorDiv = document.getElementById('bg_color_wrapper');
@@ -60,6 +63,7 @@ today();
 function getHours() {
   let time = new Date();
   chrome.storage.sync.get('twofourtimeformat', (data) => {
+    console.log('Test: ', data.twofourtimeformat);
     const timeformat = data.twofourtimeformat;
     if (timeformat) {
       if (time.getHours() >= 12) {
@@ -76,7 +80,7 @@ function getHours() {
       }
     }
     else{
-      document.querySelector('#ampm').innerHTML = '';
+      document.querySelector('#ampm').innerHTML = ' ';
       document.querySelector('#hours').innerHTML = prefixZero(time.getHours());
     }
   });
@@ -254,11 +258,26 @@ todosBtn.addEventListener('click', function () {
   }
 });
 
+TimeFormatOnOffCheckbox.addEventListener('click', function () {
+  let twofourtimeformat = null;
+  if(TimeFormatOnOffCheckbox.checked) {
+    twofourtimeformat = false;
+    chrome.storage.sync.set({ twofourtimeformat });
+    getHours();
+  }
+  else {
+    twofourtimeformat = true;
+    chrome.storage.sync.set({ twofourtimeformat });
+    getHours();
+  }
+});
+
 chrome.storage.sync.get('isbackground', (data) => {
   const BgImage = data.isbackground;
   if (BgImage) {
     BgOnOffCheckbox.checked = true;
     BgRefresh.classList.remove('disable');
+    BgCategory.classList.remove('disable');
   }
   else {
     BgOnOffCheckbox.checked = false;
@@ -270,11 +289,13 @@ BgOnOffCheckbox.addEventListener('click', function () {
   if(BgOnOffCheckbox.checked) {
     backgroundImage.classList.remove('hide');
     BgRefresh.classList.remove('disable');
+    BgCategory.classList.remove('disable');
     bgColorDiv.classList.add('disable');
   }
   else {
     backgroundImage.classList.add('hide');
     BgRefresh.classList.add('disable');
+    BgCategory.classList.add('disable');
     bgColorDiv.classList.remove('disable');
   }
 });
