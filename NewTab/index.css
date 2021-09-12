@@ -284,6 +284,15 @@ input[type="text"] {
   font-size: 0.9rem;
 }
 
+.option.bg-color {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bg-color button {
+  margin-right: 5px;
+}
+
 .reload {
   font-size: 1.5rem;
   cursor: pointer;
@@ -297,6 +306,7 @@ input[type="text"] {
 .switch input {
   position: absolute;
   opacity: 0;
+  cursor: pointer;
 }
 
 .switch {
@@ -313,7 +323,7 @@ input[type="text"] {
 .switch div {
   height: 0.8rem;
   width: 0.8rem;
-  margin: 2px;
+  margin: 1px 2px;
   border-radius: 0.8em;
   background: #333333;
   box-shadow: 0 0.1rem 0.3rem rgba(0,0,0,0.3);

@@ -14,6 +14,14 @@ const todosModel = document.getElementById('todos_model');
 
 let backgroundImage = document.getElementById('backgroundImage');
 
+const BgOnOffCheckbox = document.getElementById('bg_checkbox');
+const BgRefresh = document.getElementById('bg_refresh');
+const BgReloadBtn = document.getElementById('bg_reload');
+
+const page = document.getElementById('bg_color_palette');
+const bgColorDiv = document.getElementById('bg_color_wrapper');
+const bgColors = ["#1976d2", "#dc004e", "#79e902", "#fa9403", "#fdc702"];
+
 chrome.storage.sync.get('blue', (data) => {
   const defaultBgColor = data.blue;
   document.body.style.backgroundColor = defaultBgColor;
@@ -246,10 +254,6 @@ todosBtn.addEventListener('click', function () {
   }
 });
 
-const BgOnOffCheckbox = document.getElementById('bg_checkbox');
-const BgRefresh = document.getElementById('bg_refresh');
-const BgReloadBtn = document.getElementById('bg_reload');
-
 chrome.storage.sync.get('isbackground', (data) => {
   const BgImage = data.isbackground;
   if (BgImage) {
@@ -264,12 +268,14 @@ chrome.storage.sync.get('isbackground', (data) => {
 
 BgOnOffCheckbox.addEventListener('click', function () {
   if(BgOnOffCheckbox.checked) {
-    BgRefresh.classList.remove('disable');
     backgroundImage.classList.remove('hide');
+    BgRefresh.classList.remove('disable');
+    bgColorDiv.classList.add('disable');
   }
   else {
-    BgRefresh.classList.add('disable');
     backgroundImage.classList.add('hide');
+    BgRefresh.classList.add('disable');
+    bgColorDiv.classList.remove('disable');
   }
 });
 
@@ -277,53 +283,45 @@ BgReloadBtn.addEventListener('click', function () {
   loadBgImage();
 });
 
+// Reacts to a button click by marking the selected button and saving the selection
+function handleButtonClick(event) {
+  // Remove styling from the previously selected color
+  let current = event.target.parentElement.querySelector(`.active`);
+  if (current && current !== event.target) {
+    current.classList.remove('active');
+  }
+  // Mark the button as selected
+  let color = event.target.dataset.color;
+  event.target.classList.add('active');
+  chrome.storage.sync.set({ color });
+  document.body.style.backgroundColor = color;
+}
 
+// Add a button to the page for each supplied color
+function constructOptions(buttonColors) {
+  chrome.storage.sync.get('color', (data) => {
+    let currentColor = data.color;
+    // For each color we were provided…
+    for (let buttonColor of buttonColors) {
+      // …create a button with that color…
+      let button = document.createElement('button');
+      button.dataset.color = buttonColor;
+      button.style.backgroundColor = buttonColor;
 
-// let page = document.getElementById("backgrounColor");
-// let selectedClassName = "active";
-// const btnColors = ["#1976d2", "#dc004e", "#79e902", "#fa9403", "#fdc702"];
+      // …mark the currently selected color…
+      if (buttonColor === currentColor) {
+        button.classList.add('active');
+      }
 
+      // …and register a listener for when that button is clicked
+      button.addEventListener('click', handleButtonClick);
+      page.appendChild(button);
+    }
+  });
+}
 
-
-// // Reacts to a button click by marking the selected button and saving the selection
-// function handleButtonClick(event) {
-//   // Remove styling from the previously selected color
-//   let current = event.target.parentElement.querySelector(`.${selectedClassName}`);
-//   if (current && current !== event.target) {
-//     current.classList.remove(selectedClassName);
-//   }
-//   // Mark the button as selected
-//   let color = event.target.dataset.color;
-//   event.target.classList.add(selectedClassName);
-//   chrome.storage.sync.set({ color });
-//   document.body.style.backgroundColor = color;
-// }
-
-// // Add a button to the page for each supplied color
-// function constructOptions(buttonColors) {
-//   chrome.storage.sync.get("color", (data) => {
-//     let currentColor = data.color;
-//     // For each color we were provided…
-//     for (let buttonColor of buttonColors) {
-//       // …create a button with that color…
-//       let button = document.createElement("button");
-//       button.dataset.color = buttonColor;
-//       button.style.backgroundColor = buttonColor;
-
-//       // …mark the currently selected color…
-//       if (buttonColor === currentColor) {
-//         button.classList.add(selectedClassName);
-//       }
-
-//       // …and register a listener for when that button is clicked
-//       button.addEventListener("click", handleButtonClick);
-//       page.appendChild(button);
-//     }
-//   });
-// }
-
-// // Initialize the page by constructing the color options
-// constructOptions(btnColors);
+// Initialize the page by constructing the color options
+constructOptions(bgColors);
 
 // newsBtn.addEventListener("click", function () {
 //   if(sportsModel.classList.contains("active")) {
