@@ -1,4 +1,4 @@
-# chrome-extension-newtab
+# chrome-extension-newtab --- In progress
 Building my first chrome extension
 
 ## Steps to install in your local machine:
